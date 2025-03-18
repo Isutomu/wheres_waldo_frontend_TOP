@@ -1,0 +1,67 @@
+// 3rd Party Modules
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+// Local Modules
+import styles from "./index.module.css";
+
+const MenuOptions = ({ option }) => (
+  <li>
+    <button
+      className={styles.button}
+      onClick={option.action}
+      style={{ display: option.display }}
+    >
+      {option.name}
+    </button>
+  </li>
+);
+
+// Exportable container
+export const Menu = () => {
+  const [showScores, setShowScores] = useState();
+  const navigate = useNavigate();
+  const options = [
+    {
+      name: "new game",
+      action: () => navigate("/new-game"),
+      display: "inline-block",
+    },
+    {
+      name: "continue",
+      action: () => navigate("/continue-game"),
+      display: document?.cookie ? "inline-block" : "none",
+    },
+    {
+      name: "high scores",
+      action: () => setShowScores(true),
+      display: "inline-block",
+    },
+  ];
+
+  return (
+    <main className={styles.main}>
+      <div className={styles.logo}>
+        <h1 className={styles.title}>
+          <span>Where's </span>
+          <span style={{ color: "var(--accent)" }}>Waldo?</span>
+        </h1>
+        <p className={styles.titleComplement}>feat. World of Final Fantasy</p>
+      </div>
+      <ul className={styles.list}>
+        {options.map((option, index) => (
+          <MenuOptions key={index} option={option} />
+        ))}
+      </ul>
+    </main>
+  );
+};
+
+MenuOptions.propTypes = {
+  option: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    action: PropTypes.func.isRequired,
+    display: PropTypes.string.isRequired,
+  }).isRequired,
+};

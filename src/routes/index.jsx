@@ -1,9 +1,10 @@
 // 3rd Party Modules
 import { createBrowserRouter } from "react-router";
 
-//Routes Object
-const routes = new createBrowserRouter([
-  { index: true, element: <HomePage /> },
-]);
+// Local Modules
+import { App } from "./App";
 
-export default routes;
+//Routes Object
+export const routes = new createBrowserRouter([
+  { path: "/", element: <App /> },
+]);

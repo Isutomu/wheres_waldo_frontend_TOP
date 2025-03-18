@@ -1,0 +1,44 @@
+.main {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  user-select: none;
+}
+
+.title {
+  font-size: var(--text-5xl);
+  line-height: var(--text-5xl);
+}
+
+.titleComplement {
+  font-size: var(--text-base);
+  text-align: center;
+  color: var(--faded);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: var(--padding-lg);
+}
+
+.button {
+  cursor: pointer;
+
+  font-weight: 600;
+
+  line-height: var(--text-5xl);
+  font-size: var(--text-2xl);
+  color: var(--color);
+  transition: font-size 0.15s linear, color 0.15s linear;
+}
+
+.button:hover {
+  font-size: var(--text-3xl);
+}
