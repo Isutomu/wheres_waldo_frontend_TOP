@@ -1,0 +1,62 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: var(--padding-sm) var(--padding-base);
+
+  border-bottom: 5px solid black;
+
+  background-color: aqua;
+}
+
+.h1 {
+  font-size: var(--text-4xl);
+
+  line-height: 2.5rem;
+}
+
+.charactersList {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 5rem;
+  place-self: center;
+  gap: var(--spacing-sm);
+
+  padding: var(--padding-xs) var(--padding-sm);
+}
+
+.character {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.characterImg {
+  height: 70%;
+}
+
+.characterName {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm);
+}
+
+.cross {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  height: 100%;
+  width: auto;
+
+  opacity: 50%;
+
+  color: red;
+}
+
+.hidden {
+  visibility: hidden;
+}

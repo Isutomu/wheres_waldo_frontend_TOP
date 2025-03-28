@@ -1,14 +1,17 @@
 // 3rd Party Modules
 import { createPortal } from "react-dom";
+import { useState } from "react";
 
 // Local Modules
 import Modal from "../../containers/Modal/Modal";
-import { useState } from "react";
+import Game from "../../containers/Game/Game";
 
 // Homepage
 const Homepage = () => {
-  const [gameData, setGameData] = useState();
   const [loadGame, setLoadGame] = useState(); // 'new' or 'previous'
+  const apiUrl = import.meta.env[
+    loadGame === "new" ? "VITE_API_URL_NEW_GAME" : "VITE_API_URL_LOAD_GAME"
+  ];
 
   return (
     <div
@@ -18,9 +21,11 @@ const Homepage = () => {
         height: "100vh",
       }}
     >
-      {!gameData
-        ? createPortal(<Modal setLoadGame={setLoadGame} />, document.body)
-        : null}
+      {!loadGame ? (
+        createPortal(<Modal setLoadGame={setLoadGame} />, document.body)
+      ) : (
+        <Game apiUrl={apiUrl} />
+      )}
     </div>
   );
 };
