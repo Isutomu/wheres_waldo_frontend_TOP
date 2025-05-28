@@ -2,9 +2,12 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { createPortal } from "react-dom";
+import { AnimatePresence } from "motion/react";
 
 // Local Modules
 import styles from "./index.module.css";
+import { HighScores } from "../../components/HighScores";
 
 const MenuOptions = ({ option }) => (
   <li>
@@ -20,7 +23,7 @@ const MenuOptions = ({ option }) => (
 
 // Exportable container
 export const Menu = () => {
-  const [showScores, setShowScores] = useState();
+  const [showScores, setShowScores] = useState(false);
   const navigate = useNavigate();
   const options = [
     {
@@ -54,6 +57,11 @@ export const Menu = () => {
           <MenuOptions key={index} option={option} />
         ))}
       </ul>
+      {showScores &&
+        createPortal(
+          <HighScores onClose={() => setShowScores(false)} />,
+          document.body,
+        )}
     </main>
   );
 };

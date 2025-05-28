@@ -22,3 +22,5 @@ For now I'll not be using tests for the frontend because I don't see value in th
 
 > [!IMPORTANT]
 > Modifiers ("not priority" and the like) don't imply importance. Most of the time they simply mean that I thought they were too difficult to tackle for now.
+
+- Make High Score Modal WAI-ARIA compliant

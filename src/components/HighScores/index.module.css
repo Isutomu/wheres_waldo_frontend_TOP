@@ -1,0 +1,88 @@
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: fade-in 0.15s linear forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalContent {
+  position: relative;
+  width: 60%;
+  height: fit-content;
+
+  padding: var(--padding-base) var(--padding-lg);
+
+  background-color: var(--background);
+  border-radius: 5px;
+
+  padding: var(--padding-xl) var(--padding-4xl);
+}
+
+.h2 {
+  text-align: center;
+  font-size: var(--text-4xl);
+
+  padding-bottom: var(--padding-lg);
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+
+  font-size: var(--text-xl);
+
+  padding-bottom: var(--padding-base);
+}
+
+.table tr {
+  display: grid;
+  grid-template-columns: 15% 1fr 15%;
+  place-items: center;
+  border-bottom: 1px solid var(--faded);
+  padding: 0 var(--padding-xs);
+}
+
+.table tbody tr:last-of-type {
+  border-bottom: none;
+}
+
+.closeButton {
+  cursor: pointer;
+
+  position: absolute;
+  top: 0px;
+  right: 0px;
+
+  font-weight: 900;
+  font-size: var(--text-lg);
+
+  border-bottom: 2px solid var(--faded);
+  border-left: 2px solid var(--faded);
+  border-radius: 0 0 0 5px;
+  padding: 0 var(--padding-sm);
+
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.closeButton:hover {
+  background-color: var(--faded);
+  color: var(--background);
+}
