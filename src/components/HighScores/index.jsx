@@ -1,8 +1,11 @@
 // 3rd Party Modules
 import { IoClose } from "react-icons/io5";
+import PropTypes from "prop-types";
 
 // Local Modules
 import styles from "./index.module.css";
+import { Loading } from "../Loading";
+import useData from "../../utils/hooks/useData";
 
 const Score = ({ scoreInfo }) => {
   return (
@@ -15,11 +18,9 @@ const Score = ({ scoreInfo }) => {
 };
 
 export const HighScores = ({ onClose }) => {
-  const data = [
-    { username: "user1", score: 5000 },
-    { username: "possiblyUser2", score: 3000 },
-    { username: "CertainlyUser3", score: 200 },
-  ];
+  const { data, loading } = useData(
+    import.meta.env.VITE_API_URL + "/high-scores",
+  );
 
   return (
     <div className={styles.modal}>
@@ -28,24 +29,42 @@ export const HighScores = ({ onClose }) => {
           <IoClose size="1.5rem" x />
         </button>
         <h2 className={styles.h2}>HIGH SCORES</h2>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>username</th>
-              <th>score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((scoreInfo, index) => (
-              <Score
-                key={index}
-                scoreInfo={{ position: index + 1, ...scoreInfo }}
-              />
-            ))}
-          </tbody>
-        </table>
+        {loading ? (
+          <Loading />
+        ) : data.length ? (
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>username</th>
+                <th>score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((scoreInfo, index) => (
+                <Score
+                  key={index}
+                  scoreInfo={{ position: index + 1, ...scoreInfo }}
+                />
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <h2 style={{ textAlign: "center" }}>No high scores yet!</h2>
+        )}
       </div>
     </div>
   );
+};
+
+HighScores.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
+
+Score.propTypes = {
+  scoreInfo: PropTypes.shape({
+    position: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    score: PropTypes.number.isRequired,
+  }),
 };

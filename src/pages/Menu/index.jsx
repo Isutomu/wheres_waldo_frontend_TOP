@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence } from "motion/react";
 
 // Local Modules
 import styles from "./index.module.css";
@@ -22,18 +21,24 @@ const MenuOptions = ({ option }) => (
 );
 
 // Exportable container
-export const Menu = () => {
+export const Menu = ({ setGameMode }) => {
   const [showScores, setShowScores] = useState(false);
   const navigate = useNavigate();
   const options = [
     {
       name: "new game",
-      action: () => navigate("/new-game"),
+      action: () => {
+        navigate("/game");
+        setGameMode("/new-game");
+      },
       display: "inline-block",
     },
     {
       name: "continue",
-      action: () => navigate("/continue-game"),
+      action: () => {
+        navigate("/game");
+        setGameMode("/continue-game");
+      },
       display: document?.cookie ? "inline-block" : "none",
     },
     {
@@ -47,7 +52,7 @@ export const Menu = () => {
     <main className={styles.main}>
       <div className={styles.logo}>
         <h1 className={styles.title}>
-          <span>Where's </span>
+          <span>{"Where's "}</span>
           <span style={{ color: "var(--accent)" }}>Waldo?</span>
         </h1>
         <p className={styles.titleComplement}>feat. World of Final Fantasy</p>
@@ -64,6 +69,10 @@ export const Menu = () => {
         )}
     </main>
   );
+};
+
+Menu.propTypes = {
+  setGameMode: PropTypes.func.isRequired,
 };
 
 MenuOptions.propTypes = {
