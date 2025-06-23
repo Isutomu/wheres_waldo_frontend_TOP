@@ -17,6 +17,8 @@ export const App = () => {
     import.meta.env.VITE_API_URL + "/initialize-session",
   );
 
+  return <h2>loll</h2>;
+
   return (
     <AnimatePresence mode="wait">
       {loading ? (
