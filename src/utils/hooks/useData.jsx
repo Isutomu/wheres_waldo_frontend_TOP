@@ -19,6 +19,7 @@ const useData = (apiUrl) => {
   useEffect(() => {
     fetch(apiUrl, {
       mode: "cors",
+      credentials: "include",
     })
       .then((response) => {
         if (response.status != 200) {

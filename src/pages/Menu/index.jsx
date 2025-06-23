@@ -21,25 +21,25 @@ const MenuOptions = ({ option }) => (
 );
 
 // Exportable container
-export const Menu = ({ setGameMode }) => {
+export const Menu = ({ setGameMode, sessionData }) => {
   const [showScores, setShowScores] = useState(false);
   const navigate = useNavigate();
   const options = [
     {
       name: "new game",
       action: () => {
-        navigate("/game");
         setGameMode("/new-game");
+        navigate("/game");
       },
       display: "inline-block",
     },
     {
       name: "continue",
       action: () => {
-        navigate("/game");
         setGameMode("/continue-game");
+        navigate("/game");
       },
-      display: document?.cookie ? "inline-block" : "none",
+      display: sessionData.gameInProgress ? "inline-block" : "none",
     },
     {
       name: "high scores",
@@ -73,6 +73,7 @@ export const Menu = ({ setGameMode }) => {
 
 Menu.propTypes = {
   setGameMode: PropTypes.func.isRequired,
+  sessionData: PropTypes.shape({ gameInProgress: PropTypes.bool.isRequired }),
 };
 
 MenuOptions.propTypes = {

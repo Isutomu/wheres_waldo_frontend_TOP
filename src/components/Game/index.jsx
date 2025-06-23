@@ -48,8 +48,7 @@ const GameImage = ({
   );
 };
 
-export const Game = ({ gameData, setScore }) => {
-  const [characters, setCharacters] = useState(gameData.gameImage.characters);
+export const Game = ({ gameData, setCharacters, setScore }) => {
   const [dialogConfig, setDialogConfig] = useState({
     top: 0,
     left: 0,
@@ -69,12 +68,16 @@ export const Game = ({ gameData, setScore }) => {
       import.meta.env.VITE_API_URL + "/guess",
       {
         method: "POST",
-        body: { characterName, characterId, ...clickPosition },
+        body: {
+          character: { name: characterName, id: characterId, ...clickPosition },
+        },
       },
     );
 
-    setScore(response.data.score);
-    setCharacters(response.data.characters);
+    if (response.data.correctGuess) {
+      setScore(response.data.score);
+      setCharacters(response.data.characters);
+    }
     setLoadingGuessResponse(false);
   };
 
@@ -85,14 +88,14 @@ export const Game = ({ gameData, setScore }) => {
       }`}
     >
       <GameImage
-        imgUrl={gameData.gameImage.url}
+        imgUrl={gameData.imageUrl}
         setClickPosition={setClickPosition}
         setDialogConfig={setDialogConfig}
         loadingGuessResponse={loadingGuessResponse}
       />
       <div className={styles.dialogWindow} style={dialogConfig}>
         <ul className={styles.dialogList}>
-          {characters.map((character, index) => (
+          {gameData.characters.map((character, index) => (
             <li
               key={index}
               className={styles.option}
@@ -111,18 +114,16 @@ export const Game = ({ gameData, setScore }) => {
 
 Game.propTypes = {
   setScore: PropTypes.func.isRequired,
+  setCharacters: PropTypes.func.isRequired,
   gameData: PropTypes.shape({
-    gameImage: {
-      url: PropTypes.string.isRequired,
-      characters: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          id: PropTypes.string.isRequired,
-          url: PropTypes.string.isRequired,
-          quantity: PropTypes.number.isRequired,
-        }).isRequired,
-      ).isRequired,
-    },
+    imageUrl: PropTypes.string,
+    score: PropTypes.number,
+    characters: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        url: PropTypes.string,
+      }),
+    ),
   }).isRequired,
 };
 
