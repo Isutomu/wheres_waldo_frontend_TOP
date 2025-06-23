@@ -1,4 +1,4 @@
-# wheres_waldo_backend_TOP
+# wheres_waldo_frontend_TOP
 
 > [!IMPORTANT]
 > This is only the **frontend** part of the project. Be sure to also visit the [backend](https://github.com/Isutomu/wheres_waldo_backend_TOP) part.
