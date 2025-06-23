@@ -1,11 +1,13 @@
 // 3rd Party Modules
 import PropTypes from "prop-types";
+import { createPortal } from "react-dom";
 
 // Local Modules
 import styles from "./index.module.css";
 import { useState } from "react";
 import { Loading } from "../Loading";
 import { fetchRequest } from "../../utils/backend/fetchRequest";
+import { WinnerForm } from "../WinnerForm";
 
 const GameImage = ({
   imgUrl,
@@ -59,6 +61,7 @@ export const Game = ({ gameData, setCharacters, setScore }) => {
     topPercentage: 0,
   });
   const [loadingGuessResponse, setLoadingGuessResponse] = useState(false);
+  const [gameOver, setGameOver] = useState(gameData?.gameOver);
   const orientation = window.innerWidth > window.innerHeight ? 0 : 1; // 0 "landscape" - 1 "portrait"
 
   const handleCharacterSelection = async (characterName, characterId) => {
@@ -77,6 +80,9 @@ export const Game = ({ gameData, setCharacters, setScore }) => {
     if (response.data.correctGuess) {
       setScore(response.data.score);
       setCharacters(response.data.characters);
+    }
+    if (response.data?.gameOver) {
+      setGameOver(true);
     }
     setLoadingGuessResponse(false);
   };
@@ -108,6 +114,7 @@ export const Game = ({ gameData, setCharacters, setScore }) => {
           ))}
         </ul>
       </div>
+      {gameOver && createPortal(<WinnerForm />, document.body)}
     </main>
   );
 };
@@ -124,6 +131,7 @@ Game.propTypes = {
         url: PropTypes.string,
       }),
     ),
+    gameOver: PropTypes.bool,
   }).isRequired,
 };
 

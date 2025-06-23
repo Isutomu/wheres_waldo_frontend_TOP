@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "predeploy": "vite build",
-    "build": "vite build",
+    "build": "vite build && echo '/api/*  https://whereswaldobackendtop-wheres-waldo.up.railway.app/:splat  200\n/* /index.html  200' | cat >dist/_redirects ",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": ""

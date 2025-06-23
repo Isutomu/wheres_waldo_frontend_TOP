@@ -1,0 +1,75 @@
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: fade-in 0.15s linear forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalContent {
+  position: relative;
+  width: 60%;
+  height: fit-content;
+
+  padding: var(--padding-base) var(--padding-lg) var(--padding-lg);
+
+  background-color: var(--background);
+  border-radius: 5px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  border: 1px solid var(--faded);
+  border-radius: 5px;
+
+  font-size: var(--text-xl);
+  color: var(--accent);
+  outline-color: var(--accent);
+}
+
+.submitButton {
+  align-self: stretch;
+  margin: var(--spacing-xxs) 0;
+  cursor: pointer;
+
+  font-weight: 900;
+  font-size: var(--text-lg);
+
+  border: 2px solid var(--faded);
+  border-radius: 5px;
+  padding: 0 var(--padding-sm);
+
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.submitButton:hover {
+  background-color: var(--faded);
+  color: var(--background);
+}
