@@ -13,9 +13,9 @@ import styles from "./App.module.css";
 export const App = () => {
   const [gameMode, setGameMode] = useState();
   const location = useLocation();
-  const { data, loading } = useData(
-    import.meta.env.VITE_API_URL + "/initialize-session",
-  );
+  // const { data, loading } = useData(
+  //   import.meta.env.VITE_API_URL + "/initialize-session",
+  // );
 
   return <h2>loll</h2>;
 
